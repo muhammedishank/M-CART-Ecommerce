@@ -1,0 +1,254 @@
+{{!--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
+<section class="cart_area section_padding">
+  <div class="container">
+    <div class="cart_inner">
+      <div class="table-responsive">
+        <table class="table ">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Name</th>
+
+              <th scope="col">Price</th>
+              <th scope="col"> </th>
+              <th scope="col">Total</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each products}}
+            <tr>
+              <td>
+                <div class="media">
+                  <div class="d-flex">
+                    <img src="/uploads/{{this.product.image.[0].images}}" alt="" />
+                  </div>
+              <td>
+                <h5>{{this.product.Product}}</h5>
+              </td>
+
+              </td>
+              <td>
+                <h5>{{this.product.Prize}}</h5>
+              </td>
+              <td>
+                <div class="text-center  m-5 ">
+                  <button
+                    style="border:none;background-color:#735671;color:white; border-radius: 50%; font-weight: bold;font-display: inherit; margin: 5px;width: 22 px;"
+                    onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}','{{this.product.Product}}','{{this.product.Prize}}',-1)">-</button>
+                  <span id="{{this.product._id}}">{{this.quantity}}</span>
+                  <button
+                    style="border:none;background-color:#735671;color:white;border-radius: 50%;font-weight: bold;font-display: inherit;margin: 5px;width: 22 px;"
+                    onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}','{{this.product.Product}}','{{this.product.Prize}}',1)">+</button>
+                </div>
+              </td>
+              <td>
+                <h5 id="{{this.product.Product}}">{{this.subtotal}}</h5>
+              </td>
+              <td>
+                <button class="btn btn-danger "
+                  onclick="deleteProduct('{{this._id}}','{{this.product._id}}')">REMOVE</button>
+                {{!-- <a href="#" class="btn btn-danger ">REMOVE</a> --}}
+              </td>
+            </tr>
+            {{/each}}
+            {{!-- <tr class="bottom_button">
+              <td>
+                <a class="btn_1" href="#">Update Cart</a>
+              </td>
+              <td></td>
+              <td></td>
+              <td>
+                <div class="cupon_text float-right">
+                  <a class="btn_1" href="#">Close Coupon</a>
+                </div>
+              </td>
+            </tr> --}}
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <h5>Subtotal</h5>
+              </td>
+              <td>
+                <h4>₹ <span id="total">{{total}}</span></h4>
+              </td>
+            </tr>
+            {{!-- <tr class="shipping_area">
+              <td></td>
+              <td></td>
+              <td>
+                <h5>Shipping</h5>
+              </td>
+              <td>
+                <div class="shipping_box">
+                  <ul class="list">
+                    <li>
+                      Flat Rate: $5.00
+                      <input type="radio" aria-label="Radio button for following text input">
+                    </li>
+                    <li>
+                      Free Shipping
+                      <input type="radio" aria-label="Radio button for following text input">
+                    </li>
+                    <li>
+                      Flat Rate: $10.00
+                      <input type="radio" aria-label="Radio button for following text input">
+                    </li>
+                    <li class="active">
+                      Local Delivery: $2.00
+                      <input type="radio" aria-label="Radio button for following text input">
+                    </li>
+                  </ul>
+                  <h6>
+                    Calculate Shipping
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </h6>
+                  <select class="shipping_select">
+                    <option value="1">Bangladesh</option>
+                    <option value="2">India</option>
+                    <option value="4">Pakistan</option>
+                  </select>
+                  <select class="shipping_select section_bg">
+                    <option value="1">Select a State</option>
+                    <option value="2">Select a State</option>
+                    <option value="4">Select a State</option>
+                  </select>
+                  <input class="post_code" type="text" placeholder="Postcode/Zipcode" />
+                  <a class="btn_1" href="#">Update Details</a>
+                </div>
+              </td>
+            </tr> --}}
+          </tbody>
+        </table>
+        <div class="checkout_btn_inner float-right">
+          <a class="btn_1 checkout_btn_1" href="/place-order">PLACE ORDER</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<style>
+  .section_padding {
+    padding: 0%;
+  }
+
+  .cart_inner .table thead tr th {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(92, 83, 83);
+  }
+
+  .btn_1 {
+
+    background-color: #735671;
+  }
+</style>
+
+<script>
+  function changeQuantity(cartId, proId, userId, proName, proPrice, count) {
+    let quantity = parseInt(document.getElementById(proId).innerHTML)
+    count = parseInt(count)
+
+    $.ajax({
+      url: '/change-product-quantity',
+      data: {
+        user: userId,
+        cart: cartId,
+        product: proId,
+        count: count,
+        price: proPrice,
+        quantity: quantity
+      },
+      method: 'post',
+      success: (response) => {
+
+        if (response.removeProduct) {
+           Swal.fire({
+            title: 'Product removed from your cart',
+            icon: 'warning',
+            showCancelButton: false,
+           
+            confirmButtonText: 'Ok'
+        }).then((result) => {
+            if (result.isConfirmed) {
+               
+              location.href = self.attr('href');
+            }
+        })
+          // location.reload : reloading the page after removed
+          location.reload()
+        } else if(response.error){
+            Swal.fire({
+            title: 'Out of Stock',
+            icon: 'warning',
+            showCancelButton: false,
+           
+            confirmButtonText: 'Ok'
+        }).then((result) => {
+            if (result.isConfirmed) {
+               
+              location.href = self.attr('href');
+            }
+        })
+        }
+        
+         else {
+          document.getElementById(proId).innerHTML = quantity + count
+          document.getElementById('total').innerHTML = response.total
+          document.getElementById(proName).innerHTML = (proPrice) * (count + quantity)
+
+        }
+      }
+    })
+  }
+</script>
+<script>
+  function deleteProduct(cartId, proId) {
+
+    var self = $(this);
+    console.log(self.data('title'));
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        ).then(() => {
+          delet()
+        })
+
+      }
+    })
+    function delet() {
+      $.ajax({
+        url: '/delete-product',
+        data: {
+          cart: cartId,
+          product: proId
+        },
+        method: 'post',
+        success: (response) => {
+          if (response) {
+            location.reload()
+          }
+        }
+      })
+    }
+
+  }
+</script>

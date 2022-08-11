@@ -1,0 +1,151 @@
+
+        <style>
+            .start {
+                background: #fff;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            .btn::before {
+    background-color: white;}
+        </style>
+        <div class="container start">
+            <center>
+                <h3>Invoice</h3>
+            </center>
+
+            <div class="row">
+
+                <div class="col-12">
+                    <div style="border-radius: 30px;" class="card border" id="invoice">
+                        <div class="card-body p-0">
+                            <div class="row p-5">
+                                <div class="col-md-3">
+                                     <img src="/img/logo/mcart.png" alt="" class=" heartbeat">
+                                </div>
+
+                                <div class="col-md-6 text-center">
+                                    <p class="font-weight-bold mb-1">Invoice {{orderedDetails._id}}
+                                    </p>
+                                    <p class="text-muted">Due to: {{orderedDetails.date}}
+                                    </p>
+                                </div>
+                                <div class="col-md-3 text-right">
+                                    <button style="background-color: white" onclick="generatePDF()"
+                                        class="btn  mb-2 ml-auto mr-5 float-end">Download as PDF</button>
+                                </div>
+                            </div>
+
+                            <hr class="my-2">
+
+                            <div class="row pb-5 p-5">
+                                <div class="col-md-6">
+                                    <p class="font-weight-bold mb-4">Client Information</p>
+                                    <p class="mb-1">
+                                       {{orderedDetails.deliveryDetails.firstName}} {{orderedDetails.deliveryDetails.lastName}}
+                                    </p>
+
+                                    <p class="mb-1">
+                                       {{orderedDetails.deliveryDetails.address1}}<br>{{orderedDetails.deliveryDetails.town}}<br>
+                                       {{orderedDetails.deliveryDetails.zip}}<br>{{orderedDetails.deliveryDetails.district}}<br>
+                                       {{orderedDetails.deliveryDetails.state}}
+                                    </p>
+                                    <p class="mb-1">
+                                        {{orderedDetails.deliveryDetails.mobile}}
+                                    </p>
+                                   
+                                </div>
+
+                                <div class="col-md-6 text-right">
+                                    <p class="font-weight-bold mb-4">Payment Details</p>
+                                    <p class="mb-1"><span class="text-muted">Payment Type: </span>
+                                        {{orderedDetails.paymentMethod}}
+                                    </p>
+                                    <p class="mb-1"><span class="text-muted">Name: </span>
+                                       {{orderedDetails.deliveryDetails.firstName}} {{orderedDetails.deliveryDetails.lastName}}                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row pr-5 pl-5 mb-5">
+                                <div class="col-md-12" style="overflow-x:auto;">
+                                    <table class="table" id="invoice">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-0 text-uppercase small font-weight-bold">No</th>
+                                                <th class="border-0 text-uppercase small font-weight-bold">Item</th>
+                                                <th class="border-0 text-uppercase small font-weight-bold">Type</th>
+                                                <th class="border-0 text-uppercase small font-weight-bold">Quantity</th>
+                                                <th class="border-0 text-uppercase small font-weight-bold">Unit Cost
+                                                </th>
+                                                <th class="border-0 text-uppercase small font-weight-bold">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each orderProducts}}
+                                                <tr>
+                                                    <td></td>
+                                                    <td>
+                                                        {{this.product.Product}}
+                                                    </td>
+                                                    <td>
+                                                        {{this.product.Category}}
+                                                    </td>
+                                                    <td>
+                                                        {{this.quantity}}
+                                                    </td>
+                                                    <td>₹  {{this.product.Prize}}
+                                                    </td>
+                                                    <td>₹ {{this.subtotal}}
+                                                    </td>
+                                                </tr>
+                                                {{/each}}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div style="background-color: #a8729a; border-bottom-left-radius: 30px;border-bottom-right-radius: 30px;"
+                                class="d-flex flex-row-reverse  text-white p-4">
+                                <div class="py-3 px-5 text-right">
+                                    <div class="mb-2">Grand Total</div>
+                                    <div class="h2 font-weight-light">₹ {{orderedDetails.totalAmountToBePaid}}
+                                    </div>
+                                </div>
+
+                                <div class="py-3 px-5 text-right">
+                                    {{#if orderedDetails.couponDiscount}}
+                                    <div class="mb-2">Discount</div>
+                                    
+                                        <div class="h2 font-weight-light">₹ {{orderedDetails.couponDiscount}}
+                                        </div>
+                                        {{/if}}
+                                            <div class="h2 font-weight-light"></div>
+                                           
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+            integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            function generatePDF() {
+
+                const element = document.getElementById('invoice');
+                var opt = {
+                    margin: 1,
+                    filename: 'M-Cart-Invoice.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'letter', orientation: 'portrait' }
+                };
+                html2pdf().set(opt).from(element).save("M-Cart-Invoice.pdf");
+            }
+        </script>
+       

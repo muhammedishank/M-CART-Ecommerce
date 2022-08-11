@@ -1,0 +1,217 @@
+<div class="container mt-5">
+	<div class="row ">
+		<div style="margin: auto;border-radius: 20px;" class="col-12 col-md-10 hh-grayBox pt45 pb20 text-center">
+			<div class="row justify-content-between">
+				<div class="order-tracking">
+					<span class="is-complete"></span>
+					<p>Ordered<br><span>Mon, June 24</span></p>
+				</div>
+				<div class="order-tracking">
+					<span class="is-complete"></span>
+					<p>Shipped<br><span>Tue, June 25</span></p>
+				</div>
+				<div class="order-tracking">
+					<span class="is-complete"></span>
+					<p>Delivered<br><span>Fri, June 28</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="d-flex justify-content-center container mt-5">
+	<div class="card p-3 bg-white"><i class="fa fa-apple"></i>
+
+
+		<div class="about-product text-center mt-2"><img src="/uploads/{{products.image.[0].images}}" width="300">
+			<div>
+				<h4>{{products.Product}}</h4>
+				<h6 class="mt-0 text-black-50">Apple pro display XDR</h6>
+			</div>
+		</div>
+		<div class="stats mt-2">
+			<div class="d-flex justify-content-between p-price"><span>price</span><span>₹ {{products.Prize}}</span>
+			</div>
+			<div class="d-flex justify-content-between p-price"><span>brand</span><span>{{products.Brand}}</span></div>
+			<div class="d-flex justify-content-between p-price"><span>quantity</span><span>x
+					{{orderProducts.[0].quantity}}</span>
+			</div>
+			<div class="d-flex justify-content-between p-price"><span>status</span><span
+					style="color: blue;">{{orderProducts.[0].status}}</span></div>
+		</div>
+		<div class="d-flex justify-content-between total font-weight-bold mt-4">
+			<span>Total</span><span style="color: black;">₹ {{orderProducts.[0].subtotal}}</span>
+		</div>
+		{{#if orderProducts.cancel }}
+		<button class="btn btn-danger"
+			onclick="cancelOrder('{{orderProducts.[0]._id}}','{{orderProducts.[0].item}}','{{orderProducts.[0].subtotal}}','{{orderProducts.[0].totalAmountToBePaid}}','{{orderProducts.[0].couponPercent}}','{{orderProducts.[0].reFund}}','{{proLength}}','{{orderCancelCount}}')">Cancel
+			Order</button>
+		{{!-- <a
+			href="/cancel-orderProduct/{{orderProducts.[0].item}}/?orderId={{orderProducts.[0]._id}}&subtotal={{orderProducts.[0].subtotal}}&totalAmount={{orderProducts.[0].totalAmount}}"
+			class="btn btn-danger">Cancel Order</a> --}}
+		{{!-- <div class="text-center ">
+			<form action="/cancel-order" method="post">
+				<input type="text" name="totalAmount" value="{{orderProducts.[0].totalAmount}}" hidden>
+				<input type="text" name="subtotal" value="{{orderProducts.[0].subtotal}}" hidden>
+				<input type="text" name="orderId" value="{{orderProducts.[0]._id}}" hidden>
+				<input type="text" name="proId" value="{{orderProducts.[0].item}}" hidden>
+				<button type="submit" class="btn btn-danger">Cancel Order</button>
+			</form>
+		</div> --}}
+		{{/if}}
+
+
+	</div>
+</div>
+<style>
+	.card {
+		width: 444px;
+	}
+
+	body {
+		background: #eee;
+	}
+
+	.hh-grayBox {
+		background-color: #F8F8F8;
+		margin-bottom: 20px;
+		padding: 35px;
+		margin-top: 20px;
+	}
+
+	.pt45 {
+		padding-top: 45px;
+	}
+
+	.order-tracking {
+		text-align: center;
+		width: 33.33%;
+		position: relative;
+		display: block;
+	}
+
+	.order-tracking .is-complete {
+		display: block;
+		position: relative;
+		border-radius: 50%;
+		height: 30px;
+		width: 30px;
+		border: 0px solid #AFAFAF;
+		background-color: #f7be16;
+		margin: 0 auto;
+		transition: background 0.25s linear;
+		-webkit-transition: background 0.25s linear;
+		z-index: 2;
+	}
+
+	.order-tracking .is-complete:after {
+		display: block;
+		position: absolute;
+		content: '';
+		height: 14px;
+		width: 7px;
+		top: -2px;
+		bottom: 0;
+		left: 5px;
+		margin: auto 0;
+		border: 0px solid #AFAFAF;
+		border-width: 0px 2px 2px 0;
+		transform: rotate(45deg);
+		opacity: 0;
+	}
+
+	.order-tracking.completed .is-complete {
+		border-color: #27aa80;
+		border-width: 0px;
+		background-color: #27aa80;
+	}
+
+	.order-tracking.completed .is-complete:after {
+		border-color: #fff;
+		border-width: 0px 3px 3px 0;
+		width: 7px;
+		left: 11px;
+		opacity: 1;
+	}
+
+	.order-tracking p {
+		color: #A4A4A4;
+		font-size: 16px;
+		margin-top: 8px;
+		margin-bottom: 0;
+		line-height: 20px;
+	}
+
+	.order-tracking p span {
+		font-size: 14px;
+	}
+
+	.order-tracking.completed p {
+		color: #000;
+	}
+
+	.order-tracking::before {
+		content: '';
+		display: block;
+		height: 3px;
+		width: calc(100% - 40px);
+		background-color: #f7be16;
+		top: 13px;
+		position: absolute;
+		left: calc(-50% + 20px);
+		z-index: 0;
+	}
+
+	.order-tracking:first-child:before {
+		display: none;
+	}
+
+	.order-tracking.completed:before {
+		background-color: #27aa80;
+	}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/javascripts/addToCart.js"></script>
+<script>
+	var foo = "{{orderProducts.[0].status}}";
+	var div = document.getElementsByClassName("order-tracking")
+	if (foo == "Ordered") {
+		div[0].classList.add('completed')
+	} else if (foo == "Shipped") {
+		div[0].classList.add('completed')
+		div[1].classList.add('completed')
+	} else if (foo == "Delivered") {
+		div[0].classList.add('completed')
+		div[1].classList.add('completed')
+		div[2].classList.add('completed')
+	}
+
+	function cancelOrder(orderId, proId, subtotal, totalAmount, couponPercent, reFund, proLength, orderCancelCount) {
+		$.ajax({
+			url: '/cancel-order',
+			data: {
+				orderId: orderId,
+				proId: proId,
+				subtotal: subtotal,
+				totalAmount: totalAmount,
+				couponPercent: couponPercent,
+				reFund: reFund,
+				proLength: proLength,
+				orderCancelCount: orderCancelCount,
+			},
+			method: 'post',
+			success: (response) => {
+				if (response.status) {
+					alert(' Product Cancelled from Order')
+					location.href = '/viewOrderProducts/' + orderId
+				} else {
+					alert("all Product Cancelled from Order")
+					location.href = '/viewOrderProducts/' + orderId
+				}
+			}
+		})
+	}
+</script>

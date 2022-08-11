@@ -1,0 +1,132 @@
+<style>
+  .header-area .main-header .menu-wrapper .main-menu ul ul.submenu {
+    position: absolute;
+    width: 90px;
+    background: #fff;
+    left: 0;
+    top: 90%;
+  }
+
+  .badge-success {
+    background-color: #87d87d;
+
+    color: #fff;
+    margin-left: 5 px;
+    width: 24 px;
+  }
+</style>
+<header>
+  <!-- Header Start -->
+  <div class="header-area mb-4">
+    <div class="main-header header-sticky">
+      <div class="container-fluid">
+        <div class="menu-wrapper">
+          <!-- Logo -->
+
+          <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 d-none d-sm-block">
+            <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+              <img src="/img/logo/mcart.png" alt="" class=" heartbeat">
+            </div>
+          </div>
+          <!-- Main-menu -->
+          <div class="main-menu d-none d-lg-block">
+            <nav>
+              <ul id="navigation">
+                <li><a href="/user-home">Home</a></li>
+                <li><a href="/latest-products">Latest</a></li>
+                <li><a href="/shopping">shop</a></li>
+
+                {{#if user}}
+                <li><a href="/allOrders">Orders</a></li>
+                {{/if}}
+                {{!-- <li><a href="about.html">about</a></li> --}}
+                {{!-- <li><a href="#">Latest</a>
+                  <ul class="submenu">
+                    <li><a href="shop.html"> Product list</a></li>
+                    <li><a href="product_details.html"> Product Details</a></li>
+                  </ul>
+                </li> --}}
+                {{!-- <li><a href="blog.html">Blog</a>
+                  <ul class="submenu">
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="blog-details.html">Blog Details</a></li>
+                  </ul>
+                </li> --}}
+
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">about</a></li>
+                {{#if user}}
+               
+                <li><button style="border:none;outline:none;background-color: white;" type="button" class=""
+                    data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                    <span style="color: black;background-color:white" class="flaticon-search"></span>
+                  </button></li>
+
+                <li><a href="/cart"><span class="flaticon-shopping-cart"><span id="cart-count"
+                        class="badge badge-success ">{{cartCount}}</span></span></a>
+                </li>
+                <li><a href="/wishList"><span class="flaticon-heart"><span id="wishList-count"
+                        class="badge badge-success ">{{wishlistCount}}</span></span></a>
+                </li>
+                <li class=""><a href="/user-profile">{{user.name}}</a>
+
+                </li>
+
+                {{else}}
+
+                {{!-- <li><a href="#"><span class="flaticon-search"></span></a>
+                </li> --}}
+                <li><button style="border:none;outline:none;background-color: white;" type="button" class=""
+                    data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                    <span style="color: black;background-color:white" class="flaticon-search"></span>
+                  </button></li>
+                <li><a href="/cart"><span class="flaticon-shopping-cart"></span></a>
+                </li>
+                </li>
+                <li>
+                  <a href="/user-login"><span class="flaticon-user"></span></a>
+                </li>
+
+                {{/if}}
+
+
+              </ul>
+            </nav>
+          </div>
+
+        </div>
+        <!-- Mobile Menu -->
+        <div class="col-12">
+          <div class="mobile_menu d-block d-lg-none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Header End -->
+</header>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Search Your Poducts</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/searchResults" method="post">
+          <div style="display:flex;justify-content: space-between;">
+            <input style="width:100% ;margin-right: 5px;" type="text" name="key" placeholder="Search Here" required>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<div id="page">
+    <div class="container">
+        <div class="mt-5 ">
+            <h4>Orders List</h4>
+        </div>
+    </div>
+    <section class="mt-5 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-striped" id="user-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Order ID & Date</th>
+
+                                <th scope="col">User</th>
+
+                                <th scope="col">Total Bill</th>
+                                <th scope="col">Payment Method</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Details</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each orders}}
+                            <tr>
+
+                                <td scope="row">
+                                    <div>Order ID :{{this._id}}</div>
+                                    <div>Date :{{this.date}}</div>
+                                    
+                                </td>
+
+                                <td>
+
+                                    <div>Address :{{this.deliveryDetails.address1}} </div>
+                                    <div>PIN :{{this.deliveryDetails.zip}} </div>
+                                    <div>Mobile :{{this.deliveryDetails.mobile}}</div>
+                                </td>
+                                <td>
+                                    <div>₹{{this.totalAmountToBePaid}}</div>
+                                    {{!-- <div>Discount : <span style="color: green;">RS.{{Discount}}</span> </div> --}}
+                                </td>
+
+                                <td>
+                                    <div>{{this.paymentMethod}} </div>
+                                </td>
+                                 <td>
+                                    
+                                    <div>Order<br>{{this.status}}</div>
+                                </td>
+
+                                <td><a href="/viewOrderProducts/{{this._id}}" class="btn btn-primary">Details</a></td>
+                            </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    {{!-- <style>
+        section {
+
+            padding: 5rem;
+        }
+    </style> --}}
+
+    {{!-- <section>
+        <table class="table table-striped" style="padding:50px; margin:auto;">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Mobile</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orderItems}}
+                <tr>
+                    <th scope="row">{{this.date}}</th>
+                    <td>{{this.products.productName}}</td>
+                    <td>{{this.quantity}}</td>
+                    <td>{{this.totalAmount}}</td>
+                </tr>
+                {{/each}}
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+    </section> --}}

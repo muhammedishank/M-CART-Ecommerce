@@ -1,0 +1,316 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+{{!--
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css">
+
+
+
+<div class="container">
+    <div class="row">
+        <aside class="col-md-3">
+            <form id="filter" method="post">
+                <div class="card">
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Category Types</h6>
+                            </a>
+                        </header>
+
+
+                        <div class="filter-content collapse show" id="collapse_2" style="">
+                            <div class="card-body">
+
+                                {{#each category}}
+
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" value="{{this.category}}"
+                                        name="Category">
+                                    <div class="custom-control-label">{{this.category}}
+                                    </div>
+                                </label>
+                                {{/each}}
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" name="Category" value="" hidden
+                                        checked>
+
+                                </label>
+
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <!-- filter-group  .// -->
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Brands </h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_2" style="">
+                            <div class="card-body">
+
+                                {{#each brand}}
+
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" value="{{this.brand}}"
+                                        name="Brand">
+                                    <div class="custom-control-label">{{this.brand}}
+                                    </div>
+                                </label>
+                                {{/each}}
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" name="Brand" value="" hidden
+                                        checked>
+
+                                </label>
+
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- filter-group .// -->
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Price range </h6>
+                            </a>
+                        </header>
+
+                        <div class="filter-content collapse show" id="collapse_2" style="">
+                            <div class="card-body">
+
+
+
+                                <label class="custom-control custom-checkbox">
+                                    <input type="radio" class="custom-control-input" value="1000" name="Prize">
+                                    <div class="custom-control-label">Under 1000
+                                    </div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="radio" class="custom-control-input" value="10000" name="Prize">
+                                    <div class="custom-control-label">Under 10000
+                                    </div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="radio" class="custom-control-input" value="50000" name="Prize">
+                                    <div class="custom-control-label">Under 50000
+                                    </div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="radio" class="custom-control-input" value="100000" name="Prize">
+                                    <div class="custom-control-label">uder 100000
+                                    </div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="radio" class="custom-control-input" value="200000" name="Prize">
+                                    <div class="custom-control-label">uder 200000
+                                    </div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="radio" class="custom-control-input" name="Prize" value="400000" hidden
+                                        checked>
+
+                                </label>
+
+
+                            </div>
+                        </div>
+
+                    </article>
+
+                </div>
+            </form>
+        </aside>
+        <main class="col-md-9">
+
+            <header class="border-bottom mb-4 pb-3">
+                <div class="form-inline">
+                    <span class="mr-md-auto"> </span>
+                    <select class="mr-2 form-control">
+                        {{!-- <option>Latest items</option>
+                        <option>Trending</option>
+                        <option>Most Popular</option>
+                        <option>Cheapest</option> --}}
+                    </select>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-outline-secondary" data-toggle="tooltip" title=""
+                            data-original-title="List view">
+                            <i class="fa fa-bars"></i></a>
+                        <a href="#" class="btn  btn-outline-secondary active" data-toggle="tooltip" title=""
+                            data-original-title="Grid view">
+                            <i class="fa fa-th"></i></a>
+                    </div>
+                </div>
+            </header>
+            <!-- sect-heading -->
+
+
+            <div class="popular-items section-padding30 pt-0">
+                <div class="container">
+                    <!-- Section tittle -->
+                    <div class="row justify-content-center">
+                        <div class="col-xl-7 col-lg-8 col-md-10">
+
+                        </div>
+                    </div>
+                    <div class="row" id="products">
+                        {{#each filterResult}}
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+
+
+                            <div style="min-width: 280px;"
+                                class="card col-lg-3 col-11 col-sm-10 col-md-8 m-4 text-center">
+                                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                    <img style="height: 250px;" src="/uploads/{{this.image.[0].images}}" alt=""
+                                        class="img-fluid" />
+                                    <a href="/prod-details/{{this._id}}">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {{this.Product}}
+                                    </h5>
+
+
+                                    <p class="card-text"><strong><del style="color: rgb(73, 69, 69);"> MRP :
+                                                {{this.currentPrize}}
+                                            </del><br>Price : {{this.Prize}}</strong>
+                                    </p>
+                                    <p class="card-text heartbeat"><strong style="color: green;">Offer :
+                                            {{this.Offer}}%</strong></p>
+
+                                    {{#if ../user}}
+                                    <button class="btn btn-danger" onclick="addTowishlist('{{this._id}}')"><i
+                                            class="fa-solid fa-heart"></i></button>
+                                    <button class="btn btn-success" onclick="addToCart('{{this._id}}')"><i
+                                            class="fa-solid fa-cart-plus"></i></button>
+
+
+                                    {{else}}
+                                    <a href="/user-login"><button class="btn btn-danger"><i
+                                                class="fa-solid fa-heart"></i></button></a>
+                                    <a href="/user-login"><button class="btn btn-success"><i
+                                                class="fa-solid fa-cart-plus"></i></button></a>
+                                    {{/if}}
+
+                                    {{!-- <button class="btn btn-danger " style="width: 60px;"
+                                        onclick="addTowishlist('{{this._id}}')"><i
+                                            class="fa-solid fa-heart"></i></button>
+                                    <button class="btn btn-success mr-3" style="width: 60px;"
+                                        onclick="addToCart('{{this._id}}')"><i
+                                            class="fa-solid fa-cart-plus"></i></button> --}}
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <!-- Button -->
+
+                </div>
+            </div>
+
+            <nav class="mt-4" aria-label="Page navigation sample">
+                <ul class="pagination">
+                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+
+        </main>
+    </div>
+</div>
+<script>
+    function addToCart(proId) {
+        $.ajax({
+            url: "/add-to-cart/" + proId,
+            method: "get",
+            success: (Response) => {
+                if (Response) {
+                    //location.reload()
+                    let count = $('#cart-count').html()
+                    count = parseInt(count) + 1
+                    $("#cart-count").html(parseInt(count))
+                }
+            }
+        })
+    }
+    function addTowishlist(proId) {
+        $.ajax({
+            url: "/add-to-wishList/" + proId,
+            method: "get",
+            success: (Response) => {
+                if (Response) {
+                    //location.reload()
+                    let count = $('#wishList-count').html()
+                    count = parseInt(count) + 1
+                    $("#wishList-count").html(parseInt(count))
+                }
+            }
+        })
+    }
+
+    $('input[name=Brand]').change(function () {
+
+        $.ajax({
+            url: '/search-brand',
+            method: "post",
+            data: $('#filter').serialize(),
+            success: (isResult) => {
+                console.log(isResult)
+                if (isResult) {
+                    // window.location.reload()
+                    // $('#products').load('/products/filter');
+                    $('#products').load(location.href + " #products");
+                }
+            }
+        })
+
+    });
+
+    $('input[name=Prize]').change(function () {
+
+        $.ajax({
+            url: '/search-brand',
+            method: "post",
+            data: $('#filter').serialize(),
+            success: (isResult) => {
+                console.log(isResult)
+                if (isResult) {
+                    // window.location.reload()
+                    // $('#products').load('/products/filter');
+                    $('#products').load(location.href + " #products");
+                }
+            }
+        })
+
+    });
+
+    $('input[name=Category]').change(function () {
+
+        $.ajax({
+            url: '/search-brand',
+            method: "post",
+            data: $('#filter').serialize(),
+            success: (isResult) => {
+                if (isResult) {
+                    // window.location.reload()
+                    // $('#products').load('/products/filter');
+                    $('#products').load(location.href + " #products");
+                }
+            }
+        })
+
+    });
+</script>

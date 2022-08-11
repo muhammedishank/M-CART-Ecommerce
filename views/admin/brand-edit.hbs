@@ -1,0 +1,30 @@
+<div class="container mt-5 col-xl-6">
+    <div>
+
+        <p class="h4 mb-4 text-center p-5">Edit Brand</p>
+
+    </div>
+    <form class="text-center border border-light " action="/admin/edit-brand" method="post"
+        enctype="multipart/form-data">
+
+
+
+        <div class="col-12 mb-5">
+
+            <div class="input-group">
+                <input type="text" name="brand" class="form-control" value="{{brand.brand}}" />
+            </div>
+
+        </div>
+        <div class="col-12">
+            <div class="input-group">
+                <input type="file" name="brandLogo" class="form-control" id="inlineFormInputGroupUsername"
+                    placeholder="Logo" />
+            </div>
+        </div>
+        <input type="text" name="brandId" class="form-control" value="{{brand._id}}" hidden />
+
+        <button class="btn btn-info my-4 " type="submit">Submit</button>
+    </form>
+    <a href="/admin/brand" class="float-end">Brand Page</a>
+</div>

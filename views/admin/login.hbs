@@ -1,0 +1,170 @@
+<style>
+    .error{
+        color: #735671;
+        opacity: 1;
+        font-size: 1rem;
+    }
+    .login_part .login_part_form .form-control {
+    font-size: 16px;
+        padding: 4px;
+        }
+        .btn-secondary {
+    color: #fff;
+    background-color: #735671;
+}
+</style>
+
+<script>
+
+  $(function () {
+
+    // First: Add with default messages
+    //$("#frm-add-data").validate();				
+
+    // Second: Change default messages
+    $("#admloginvalidation").validate({
+      rules: { // to define rules
+
+        Email: "required",
+        
+        Password: {
+          required: true,
+         
+        },
+        mobile: {
+          required: true,
+          maxlength:10,
+
+        }
+      },
+      messages: { // to define custom messages
+
+        Email: "Enter your email",
+        
+        Password: {
+          required: "Enter password",
+
+        },
+        mobnumber:{
+          required:"Enter mobile number",
+          maxlength:"Enter 10 digits"
+        }
+      },
+
+      submitHandler: function (form) {
+        if ($(form).valid())
+          form.submit();
+        return false; // prevent normal form posting
+      }
+      // when no errors
+
+    });
+  });
+</script>
+        
+{{!-- <section class=" text-center text-lg-start">
+  <style>
+    .rounded-t-5 {
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+
+    @media (min-width: 992px) {
+      .rounded-tr-lg-0 {
+        border-top-right-radius: 0;
+      }
+
+      .rounded-bl-lg-5 {
+        border-bottom-left-radius: 0.5rem;
+      }
+    }
+  </style>
+  <div class="card mb-3">
+    <div class="row g-0 d-flex align-items-center">
+      <div class="col-lg-4 d-none d-lg-flex">
+        <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" alt="Trendy Pants and Shoes"
+          class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" />
+      </div>
+      <div class="col-lg-8">
+        <div class="card-body py-5 px-md-5">
+         <h3 class="text-center m-5"> <span style="color: #735671;">ADMIN LOGIN</span> </h3>
+          <form id="admloginvalidation" method="post" action="/admin/login">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" id="form2Example1" name="Email" class="form-control" />
+              <label class="form-label" for="form2Example1">Email address</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" id="form2Example2" name="Password" class="form-control" />
+              <label class="form-label" for="form2Example2">Password</label>
+            </div>
+
+            <!-- 2 column grid layout for inline styling -->
+            
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-secondary btn-block mb-4">Log in</button>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section> --}}
+<!-- Section: Design Block -->
+<section class="vh-100" style="background-color: #9A616D;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form id="admloginvalidation" method="post" action="/admin/login">
+
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    {{!-- <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i> --}}
+                    <img src="/img/logo/mcart.png" alt="" class=" heartbeat">
+                  </div>
+
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+
+                  <div class="form-outline mb-4">
+                    <input type="email" id="form2Example17" name="Email" class="form-control form-control-lg" />
+                    <label class="form-label" for="form2Example17">Email address</label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form2Example27" name="Password" class="form-control form-control-lg" />
+                    <label class="form-label" for="form2Example27">Password</label>
+                  </div>
+
+                  <div class="pt-1 mb-4">
+                    <button  type="submit"class="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                  </div>
+
+                  {{!-- <a class="small text-muted" href="#!">Forgot password?</a> --}}
+                  {{!-- <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="#!"
+                      style="color: #393f81;">Register here</a></p>
+                  <a href="#!" class="small text-muted">Terms of use.</a>
+                  <a href="#!" class="small text-muted">Privacy policy</a> --}}
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    
+     

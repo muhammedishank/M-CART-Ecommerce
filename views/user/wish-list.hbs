@@ -1,0 +1,134 @@
+<section class="cart_area section_padding">
+
+  <div class="container">
+    <div class="cart_inner">
+      <div class="table-responsive">
+        <table class="table ">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Name</th>
+              <th scope="col">Color</th>
+              <th scope="col">Price</th>
+              <th scope="col"></th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {{#each products}}
+            <tr>
+              <td>
+                <div class="media">
+                  <div class="d-flex">
+                    <img src="/uploads/{{this.product.image.[0].images}}" alt="" />
+                  </div>
+              <td>
+                <h5>{{this.product.Product}}</h5>
+              </td>
+      </div>
+      </td>
+      <td>
+        <h5>{{this.product.Color}}</h5>
+      </td>
+      <td>
+        <h5>{{this.product.Prize}}</h5>
+      </td>
+      <td>
+        <button class="btn btn-primary" style="background-color:#735671 ;"
+          onclick="addtoCart('{{this._id}}','{{this.product._id}}','{{../user._id}}')">ADD TO CART</button>
+        {{!-- <a href="#" class="btn btn-danger ">REMOVE</a> --}}
+
+        <button class="btn btn-danger" onclick="deleteProd('{{this._id}}','{{this.product._id}}')">REMOVE</button>
+        {{!-- <a href="#" class="btn btn-danger ">REMOVE</a> --}}
+      </td>
+      </tr>
+      {{/each}}
+      </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
+<script>
+  function addtoCart(wishId, proId, userId) {
+    $.ajax({
+      url: '/wishlist-to-cart',
+      data: {
+        wishlist: wishId,
+        product: proId,
+        user: userId
+      },
+      method: 'post',
+      success: (response) => {
+        if (response) {
+         
+          location.reload()
+        }
+      }
+    })
+  }
+
+
+  function deleteProd(wishId, proId) {
+
+    var self = $(this);
+    console.log(self.data('title'));
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        ).then(() => {
+          delet()
+        })
+      }
+    })
+
+    function delet() {
+      $.ajax({
+        url: '/delete-wishlist-product',
+        data: {
+          wishlist: wishId,
+          product: proId,
+
+        },
+        method: 'post',
+        success: (response) => {
+          if (response) {
+
+            location.reload()
+          }
+        }
+      })
+    }
+  }
+
+</script>
+
+<style>
+  .section_padding {
+    padding: 0%;
+  }
+
+  .cart_inner .table thead tr th {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(92, 83, 83);
+  }
+
+  .btn_1 {
+    background-color: #735671;
+  }
+</style>
