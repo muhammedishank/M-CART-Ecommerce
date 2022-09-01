@@ -21,11 +21,9 @@ NOTE: Please read the RUN section before opening an issue.
 
 The application is deployed to AWS and can be accessed through the following link:
 
-[bhfashion.live on AWS](https://mcarts.today/)
+[mcarts.today on AWS](https://mcarts.today/)
 
 The website resembles a real store and you can add products to your cart and wishlist and pay for them. If you want to try the checkout process, you can use the dummy card number/ upi/ Internet Bankinng provided by Razorpay for testing . Please <u><b>DO NOT</b></u> provide real card number and data.
-
-In order to access the vendor panel on "/vendor" you need to signup and login.
 
 In order to access the admin panel on "/admin" you need to provide the admin email and password.
 
@@ -44,6 +42,10 @@ To run this application, you have to set your own environmental variables. For s
 
 - TWILIO_AUTH_TOKEN: This is the Twilio AuthToken (string).
 
+- NODE MAILER_email:This is the email id(string)
+
+- NODE MAILER-password : This is the password(String)
+
 - PORT: Specify the port Number
 
 After you've set these environmental variables in the .env file at the root of the project, and intsall node modules using  `npm install`
@@ -56,6 +58,7 @@ The application is built with:
 
 - Node.js 
 - Twilio
+- Node mailer
 - MongoDB
 - Express 
 - Bootstrap 
@@ -72,32 +75,30 @@ The application displays a virtual phones and laptops store that contains virtua
 
 Users can do the following:
 
-- Create an account, login or logout
-- Browse available products added by the admin
-- Add products to the shopping cart and wishlist
-- Delete products from the shopping cart and wishlist
-- Display the shopping cart
-- To checkout, a user must be logged in
-- Checkout information is processed using razorpay and the payment is send to the admin
-- The profile contains all the orders a user has made
-- View invoices, download and cancel the orders
-- Update their profile
-- Search and filter products
- 
+- Login and signup with OTP verification using twilio
+-Through otp verification, the user can manage forgotten passwords
+- Products can be viewed from landing page with categories and Offer price
+- User can Add product to wish list
+- User can view single product details
+- Cart with subtotal and grand Total
+- Can Add multiple address including shipping address
+- Category wise render of all products
+- Product search also needed products can be filtered out
+- Payment Gateway is integrated with RAZOR PAY
+- User can apply coupen before final billing
+- User can track the purchased products
+- The user can cancel the purchased products and the payment is refundable
+- Status update of tracking is showed on order details
+- Users can download an invoice of the orders
 
 Admins can do the following:
 
-- Login or logout to the admin panel
-- Display sale report
-- Add products
-- Add categories
-- Add subcategory
-- View, edit or delete products
-- Change the orders status
-- Display the Orders done by the users
-- View all orders done by users
-- View all products done by users
-- View redeem requests and accept them
+- Admin login with pre defined credentials
+- Admin Dashboard is implemented with sales report and brand report
+- Admin can handle user block , unblock and delete
+- Can add product and change product details
+- Can add category and sub categories
+- Admin can manage order details and product details
 
 ## License
 
