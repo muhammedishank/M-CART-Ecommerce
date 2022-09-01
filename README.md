@@ -17,11 +17,11 @@ NOTE: Please read the RUN section before opening an issue.
 
 ## Demo
 
-![screenshot](bhfashionsc.png)
+![screenshot](mcart.png)
 
 The application is deployed to AWS and can be accessed through the following link:
 
-[bhfashion.live on AWS](https://bhfashion.live/)
+[bhfashion.live on AWS](https://mcarts.today/)
 
 The website resembles a real store and you can add products to your cart and wishlist and pay for them. If you want to try the checkout process, you can use the dummy card number/ upi/ Internet Bankinng provided by Razorpay for testing . Please <u><b>DO NOT</b></u> provide real card number and data.
 
@@ -55,6 +55,7 @@ Now you can run `npm start` in the terminal and the application should work.
 The application is built with:
 
 - Node.js 
+- Twilio
 - MongoDB
 - Express 
 - Bootstrap 
@@ -103,4 +104,4 @@ Admins can do the following:
 [![License](https://img.shields.io/:License-MIT-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 - MIT License
-- Copyright 2022 © [MUHAMMAD SHIHAD BH](https://github.com/Shihadkv)
+- Copyright 2022 © [Muhammed Ishan K](https://github.com/muhammedishank)
